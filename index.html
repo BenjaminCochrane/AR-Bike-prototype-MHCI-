@@ -13,18 +13,18 @@
                  geometry="primitive: box"
                  material="color: #003865"
                  scale="2 1 0"
+                 event-set__click="_event: mouseenter; color: #7D2239"
                  event-set__enter="_event: mouseenter; color: #7D2239"
                  event-set__leave="_event: mouseleave; color: #003865"></a-mixin>
       </a-assets>
       
-      <!-- Create our cursor -->
+      <!-- Create cursor -->
       <a-entity camera look-controls>
-        <!-- <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035" material="color: black;"></a-entity>-->
         <a-entity
-          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 0; from: 0.1 0.1 0.1; to: 1 1 1"
-          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 0; from: 1 1 1; to: 0.1 0.1 0.1"
-          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 0; to: 1 1 1"
-          cursor="fuse: true; fuseTimeout: 500" material="color: black; shader: flat" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035"></a-entity>
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
+          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 700; from: 1 1 1; to: 0.1 0.1 0.1"
+          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1"
+          cursor="fuse: true; fuseTimeout: 700" material="color: black; shader: flat" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035"></a-entity>
       </a-entity>
 
       <!-- Create menu items -->
@@ -32,6 +32,8 @@
       <a-box mixin="menu-item" position="-1.2 -0.75 -5"></a-box>
       <a-box mixin="menu-item" position=" 1.2  0.75 -5"></a-box>
       <a-box mixin="menu-item" position=" 1.2 -0.75 -5"></a-box>
+      <a-box mixin="menu-item" position="-1.2 -2.25 -5"></a-box>
+      <a-box mixin="menu-item" position=" 1.2 -2.25 -5"></a-box>
     </a-scene>
   </body>
 </html>
