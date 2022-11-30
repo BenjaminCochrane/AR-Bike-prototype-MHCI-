@@ -7,32 +7,29 @@
   <body>    
     <!-- Create a 3D scene with our three menu items -->
     <a-scene>
+      <!-- Define reusable asset properties -->
+      <a-assets>
+        <a-mixin id="menu-item"
+                 geometry="primitive: box"
+                 material="color: #003865"
+                 scale="2 1 0"
+                 event-set__enter="_event: mouseenter; color: #005C8A"
+                 event-set__leave="_event: mouseleave; color: #003865"></a-mixin>
+      </a-assets>
+      
       <!-- Create our cursor -->
       <a-entity camera look-controls>
-        <a-entity cursor="fuse: true; fuseTimeout: 1000" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
+        <a-entity cursor="fuse: true; objects: .menu-item" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035" material="color: #7D2239; shader: flat">
         </a-entity>
       </a-entity>
 
-      <!-- Create our three menu items -->
-      <a-box position="-1.2 0.75 -5" scale="2 1 0" rotation="0 0 0" color="#0064FF"
-             event-set__enter="_event: mouseenter; color: #0f0f0f"
-             event-set__leave="_event: mouseleave; color: #0064FF">
-      </a-box>
+      <!-- Create menu items -->
+      <a-entity mixin="menu-item" position="-1.2  0.75 -5"></a-entity>
+      <a-entity mixin="menu-item" position="-1.2 -0.75 -5"></a-entity>
+      <a-entity mixin="menu-item" position=" 1.2  0.75 -5"></a-entity>
+      <a-entity mixin="menu-item" position=" 1.2 -0.75 -5"></a-entity>
 
-      <a-box position="-1.2 -0.75 -5" scale="2 1 0" rotation="0 0 0" color="#FF0064"
-             event-set__enter="_event: mouseenter; color: #0f0f0f"
-             event-set__leave="_event: mouseleave; color: #FF0064">
-      </a-box>
-
-      <a-box position="1.2 0.75 -5" scale="2 1 0" rotation="0 0 0" color="#64FF00"
-             event-set__enter="_event: mouseenter; color: #0f0f0f"
-             event-set__leave="_event: mouseleave; color: #64FF00">
-      </a-box>
       
-      <a-box position="1.2 -0.75 -5" scale="2 1 0" rotation="0 0 0" color="#6400FF"
-             event-set__enter="_event: mouseenter; color: #0f0f0f"
-             event-set__leave="_event: mouseleave; color: #6400FF">
-      </a-box>
     </a-scene>
   </body>
 </html>
