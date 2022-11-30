@@ -27,7 +27,7 @@
           
           element.addEventListener('click', function () {
             element.setAttribute('color', data.click);
-            console.log("Click");
+            console.log("Click " + data.number);
           });
         }
       });
@@ -38,13 +38,13 @@
     <a-scene>
       <!-- Define reusable asset properties -->
       <a-assets>
-        <a-mixin id="menu-item"
-                 geometry="primitive: box"
-                 material="color: #003865"
-                 scale="2 1 0"></a-mixin>
+        <a-mixin id="menu-item" geometry="primitive: box" material="color: #003865" scale="2 1 0"></a-mixin>
       </a-assets>
       
-      <!-- Create cursor -->
+      <!-- Visual feedback -->
+      <a-text value="Hello" position="0 1.8 -5" scale="2 2 1" color="black" align="center"></a-text>
+      
+      <!-- Create cursor with animated visual feedback -->
       <a-entity camera look-controls>
         <a-entity
           animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
@@ -55,8 +55,8 @@
 
       <!-- Create menu items -->
       <a-box mixin="menu-item" target="number: 1" position="-1.2  0.75 -5"></a-box>
-      <a-box mixin="menu-item" target="number: 2" position="-1.2 -0.75 -5"></a-box>
-      <a-box mixin="menu-item" target="number: 3" position=" 1.2  0.75 -5"></a-box>
+      <a-box mixin="menu-item" target="number: 2" position=" 1.2  0.75 -5"></a-box>
+      <a-box mixin="menu-item" target="number: 3" position="-1.2 -0.75 -5"></a-box>
       <a-box mixin="menu-item" target="number: 4" position=" 1.2 -0.75 -5"></a-box>
       <a-box mixin="menu-item" target="number: 5" position="-1.2 -2.25 -5"></a-box>
       <a-box mixin="menu-item" target="number: 6" position=" 1.2 -2.25 -5"></a-box>
