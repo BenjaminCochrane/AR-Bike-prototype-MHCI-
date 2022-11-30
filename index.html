@@ -14,16 +14,25 @@
       </a-entity>
 
       <!-- Create our three menu items -->
-      <a-box position="0 1.5 -5" scale="3 1 0" rotation="0 0 0" color="#0064FF"
-             event-set__enter="_event: mouseenter; color: #8FF7FF"
-             event-set__leave="_event: mouseleave; color: #4CC3D9"></a-box>
-      <a-entity text="value: Item 1; color: #000; align: center;" position="0 1.5 -4.9" scale="5 10 1"></a-entity>
+      <a-box position="-1.2 0.75 -5" scale="2 1 0" rotation="0 0 0" color="#0064FF"
+             event-set__enter="_event: mouseenter; color: #0f0f0f"
+             event-set__leave="_event: mouseleave; color: #0064FF">
+      </a-box>
 
-      <a-box position="0 0 -5" scale="3 1 0" rotation="0 0 0" color="#FF0064"></a-box>
-      <a-entity text="value: Item 2; color: #000; align: center;" position="0 0 -4.9" scale="5 10 1"></a-entity>
+      <a-box position="-1.2 -0.75 -5" scale="2 1 0" rotation="0 0 0" color="#FF0064"
+             event-set__enter="_event: mouseenter; color: #0f0f0f"
+             event-set__leave="_event: mouseleave; color: #FF0064">
+      </a-box>
 
-      <a-box position="0 -1.5 -5" scale="3 1 0" rotation="0 0 0" color="#64FF00"></a-box>
-      <a-entity text="value: Item 3; color: #000; align: center;" position="0 -1.5 -4.9" scale="5 10 1"></a-entity>
+      <a-box position="1.2 0.75 -5" scale="2 1 0" rotation="0 0 0" color="#64FF00"
+             event-set__enter="_event: mouseenter; color: #0f0f0f"
+             event-set__leave="_event: mouseleave; color: #64FF00">
+      </a-box>
+      
+      <a-box position="1.2 -0.75 -5" scale="2 1 0" rotation="0 0 0" color="#6400FF"
+             event-set__enter="_event: mouseenter; color: #0f0f0f"
+             event-set__leave="_event: mouseleave; color: #6400FF">
+      </a-box>
     </a-scene>
   </body>
 </html>
