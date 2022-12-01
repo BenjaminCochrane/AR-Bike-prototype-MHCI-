@@ -6,7 +6,16 @@
     <script>
       var click_count = 0;
       
-      AFRAME.registerComponent('target', {
+      /*
+       * A component defines interactive behaviour that can be assigned to objects
+       * within a scene. For example, this component defines basic button functionality.
+       * It detects button events (cursor enter, cursor leave, click) and uses these
+       * to change the appearance of the button for visual feedback. If a button is
+       * fully selected (i.e., 'clicked'), event-driven behaviour can take place; in
+       * this case, a text label is updated with the identifier for the button.
+       */
+      AFRAME.registerComponent('button', {
+        // Schema defines component variables
         schema: {
           color: {default: '#003865'},
           hover: {default: '#7D2239'},
@@ -32,14 +41,14 @@
             element.setAttribute('color', data.click);
             
             // Update the text label
-            document.querySelectorAll('.text')[0].setAttribute('value', 'Selected: ' + data.item_id);
+            document.querySelectorAll('.text')[0].setAttribute('value', 'Selected: Item ' + data.item_id);
           });
         }
       });
     </script>
   </head>
   <body>    
-    <!-- Create a 3D scene with our three menu items -->
+    <!-- Create a 3D scene for our menu items -->
     <a-scene>
       <!-- Define reusable asset properties -->
       <a-assets>
@@ -59,12 +68,12 @@
       </a-entity>
 
       <!-- Create menu items -->
-      <a-box mixin="menu-item" position="-1.2  0.75 -5" text="value: Item 1" target="item_id: 1"></a-box>
-      <a-box mixin="menu-item" position=" 1.2  0.75 -5" text="value: Item 2" target="item_id: 2"></a-box>
-      <a-box mixin="menu-item" position="-1.2 -0.75 -5" text="value: Item 3" target="item_id: 3"></a-box>
-      <a-box mixin="menu-item" position=" 1.2 -0.75 -5" text="value: Item 4" target="item_id: 4"></a-box>
-      <a-box mixin="menu-item" position="-1.2 -2.25 -5" text="value: Item 5" target="item_id: 5"></a-box>
-      <a-box mixin="menu-item" position=" 1.2 -2.25 -5" text="value: Item 6" target="item_id: 6"></a-box>
+      <a-box mixin="menu-item" position="-1.2  0.75 -5" text="value: Item 1" button="item_id: 1"></a-box>
+      <a-box mixin="menu-item" position=" 1.2  0.75 -5" text="value: Item 2" button="item_id: 2"></a-box>
+      <a-box mixin="menu-item" position="-1.2 -0.75 -5" text="value: Item 3" button="item_id: 3"></a-box>
+      <a-box mixin="menu-item" position=" 1.2 -0.75 -5" text="value: Item 4" button="item_id: 4"></a-box>
+      <a-box mixin="menu-item" position="-1.2 -2.25 -5" text="value: Item 5" button="item_id: 5"></a-box>
+      <a-box mixin="menu-item" position=" 1.2 -2.25 -5" text="value: Item 6" button="item_id: 6"></a-box>
     </a-scene>
   </body>
 </html>
