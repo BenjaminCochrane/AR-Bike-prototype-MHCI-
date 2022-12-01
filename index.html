@@ -43,7 +43,7 @@
     <a-scene>
       <!-- Define reusable asset properties -->
       <a-assets>
-        <a-mixin id="menu-item" geometry="primitive: box" material="color: #003865" scale="2 1 0"></a-mixin>
+        <a-mixin id="menu-item" geometry="primitive: plane; width: 2; height: 1;" material="color: #003865" text="anchor: center; baseline: center; color: white;"></a-mixin>
       </a-assets>
       
       <!-- Visual feedback -->
@@ -59,7 +59,7 @@
       </a-entity>
 
       <!-- Create menu items -->
-      <a-box mixin="menu-item" target="number: 1" position="-1.2  0.75 -5"><a-text value="1!"></a-text></a-box>
+      <a-box mixin="menu-item" target="number: 1" position="-1.2  0.75 -5" text="value: Item 1"></a-box>
       <a-box mixin="menu-item" target="number: 2" position=" 1.2  0.75 -5"></a-box>
       <a-box mixin="menu-item" target="number: 3" position="-1.2 -0.75 -5"></a-box>
       <a-box mixin="menu-item" target="number: 4" position=" 1.2 -0.75 -5"></a-box>
