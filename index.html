@@ -7,12 +7,14 @@
     <a-scene>
       <a-assets>
         <a-asset-item id="burger" src="models/burger.gltf"></a-asset-item>
+        <a-mixin id="label" wrap-count="10" align="center" text="color: white" />
       </a-assets>
       
       <a-sky color="#005398" />
-      <a-plane color="#006630" position="0 0 0" rotation="-90 0 0" />
       
-      <a-entity gltf-model="#burger" position="0 3 1" rotation="90 0 0" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity label text="value: Burger £3.50;" position="0 0 -1" />
+      <a-entity gltf-model="#burger" position="0 0 -1" scale="0.2 0.2 0.2" />
+      
     </a-scene>
   </body>
 </html>
