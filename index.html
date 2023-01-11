@@ -37,6 +37,21 @@
           // Cursor click: start the scale animation
           element.addEventListener("click", function () {
             element.querySelector(".icon").emit("scale-begin");
+            
+            switch (data.item_id) {
+              case "1":
+                var icon_entity = document.createElement('a-entity');
+                icon_entity.setAttribute('gltf-model', '#model-burger');
+                icon_entity.setAttribute('position', '0 0 0');
+                icon_entity.setAttribute('scale', '1 1 1');
+                icon_entity.setAttribute('rotation', '0 0 0');
+                document.querySelector('#basket').appendChild(icon_entity);
+                break;
+              case "2":
+                break;
+              case "3":
+                break;
+            }
           });
         },
       });
@@ -74,8 +89,8 @@
         </a-entity>
       </a-entity>
 
-      <a-entity id="basket" geometry="primitive: plane;" material="color: black; opacity: 0.2;" scale="0.8 0.15" position="0 1.0 -1"></a-entity>
-      <a-text value="Your Order" position="-0.39 1.05 -0.99" scale="0.15 0.15" align="left"></a-text>
+      <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
+      <a-text value="Your Order" position="-0.39 1.05 -1.49" scale="0.15 0.15" align="left"></a-text>
       
       <!-- Menu item: burger -->
       <a-sphere button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 1.58 -1" >
