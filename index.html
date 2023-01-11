@@ -8,13 +8,13 @@
       <a-assets>
         <a-asset-item id="burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673449251315"></a-asset-item>
         
-        <a-mixin id="label" geometry="primitive: plane;" text="align: center; anchor: center; baseline: center; color: white;"></a-mixin>
+        <a-mixin id="item-label" geometry="primitive: plane;" material="opacity: 0.0; transparent: true;" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 20;"></a-mixin>
       </a-assets>
       
       <a-sky color="#005398"></a-sky>
       
-      <a-entity gltf-model="#burger" position="0 1.6 -1" scale="0.5 0.5 0.5"></a-entity>
-      <a-entity label text="value: Burger 3.50;" position="0.2 1.5 -0.8"></a-entity>
+      <a-entity gltf-model="#burger" position="0 1.6 -1" scale="0.5 0.5 0.5" animation="property: rotation; to: 0 360 1; dur: 4000; easing: linear; loop: true"></a-entity>
+      <a-entity mixin="item-label" text="value: Burger 3.50;" position="0 1.5 -1"></a-entity>
     </a-scene>
   </body>
 </html>
