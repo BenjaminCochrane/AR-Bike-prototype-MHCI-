@@ -4,29 +4,32 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
+      var targeting = false;
+      
       AFRAME.registerComponent('button', {
         schema: {
           item_id: {default: '0'}
         },
-
-        // The init function defines component behaviour
+        
         init: function () {
           var data = this.data;
           var element = this.el;
 
-          // Cursor enter callback - updates button colour to show it is targeted
           element.addEventListener('mouseenter', function () {
-            element.querySelector('.icon').setAttribute('animation', 'property: rotation; to: 0 360 1; dur: 4000; easing: linear; loop: true;');
+            if (!targeting) {
+              targeted = true;
+              element.querySelector('.icon').emit(@)
+            }
           });
-
-          // Cursor leave callback - resets button colour to its default value
+          
           element.addEventListener('mouseleave', function () {
             element.querySelector('.icon').setAttribute('animation', '');
           });
           
-          // Cursor click callback - updates button colour and updates a text label
           element.addEventListener('click', function () {
-            element.querySelector('.icon').setAttribute('animation', 'property: scale; from: 0.3 0.3 0.3; to: 1 1 1; dur: 500; easing: linear; loop: false;');
+            if (targeting) {
+              element.querySelector('.icon').setAttribute('animation', 'property: scale; from: 0.3 0.3 0.3; to: 1 1 1; dur: 500; easing: linear; loop: false;');
+            }
           });
         }
       });
@@ -44,15 +47,11 @@
       
       <!-- Create cursor with animated visual feedback -->
       <a-entity camera look-controls wasd-controls position="0 1.6 0">
-        <a-entity
-          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
-          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 600; from: 1 1 1; to: 0.1 0.1 0.1"
-          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1"
-          cursor="fuse: true; fuseTimeout: 600" material="color: white; shader: flat; opacity: 0.5;" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035"></a-entity>
+        <a-entity cursor material="color: white; shader: flat; opacity: 0.8;" position="0 0 -0.1" geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"></a-entity>
       </a-entity>
       
       <a-sphere button position="-0.3 1.6 -1" scale="0.15 0.15 0.15" material="color: white; opacity: 0.2;">
-        <a-entity class="icon" gltf-model="#model-burger" position="0 -0.15 0" scale="2 2 2"></a-entity>
+        <a-entity class="icon" gltf-model="#model-burger" position="0 -0.15 0" scale="2 2 2" animation="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"></a-entity>
         <a-entity mixin="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
       </a-sphere>
     </a-scene>
