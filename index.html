@@ -4,6 +4,7 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
+      var food_prices = [3.50, 1.50, 1.00];
       var order_total = 0.0;
       var order_count = 0;
       
@@ -38,20 +39,34 @@
           element.addEventListener("click", function () {
             element.querySelector(".icon").emit("scale-begin");
             
+            <!-- Create new icon entity to add to basket -->
+            var x_offset = -0.4 + order_count * 0.11;
+            order_count++;
+            
+            order_total += food_prices[data.item_id - 1];
+            
+            var icon_entity = document.createElement('a-entity');
+            icon_entity.setAttribute('position', x_offset + ' -0.06 0');
+            icon_entity.setAttribute('rotation', '0 0 0');
+            icon_entity.setAttribute('animation', 'property: rotation; to: 0 360 0; dur: 6000; easing: linear; loop: true;');
+            
             switch (data.item_id) {
               case "1":
-                var icon_entity = document.createElement('a-entity');
                 icon_entity.setAttribute('gltf-model', '#model-burger');
-                icon_entity.setAttribute('position', '0 0 0');
-                icon_entity.setAttribute('scale', '1 1 1');
-                icon_entity.setAttribute('rotation', '0 0 0');
-                document.querySelector('#basket').appendChild(icon_entity);
+                icon_entity.setAttribute('scale', '0.5 0.5 0.5');
                 break;
               case "2":
+                icon_entity.setAttribute('gltf-model', '#model-chips');
+                icon_entity.setAttribute('scale', '0.6 0.6 0.6');
                 break;
               case "3":
+                icon_entity.setAttribute('gltf-model', '#model-drink');
+                icon_entity.setAttribute('scale', '0.42 0.42 0.42');
                 break;
             }
+            
+            <!-- Add new icon as a child of the basket entity -->
+            document.querySelector('#basket').appendChild(icon_entity);
           });
         },
       });
@@ -89,8 +104,9 @@
         </a-entity>
       </a-entity>
 
+      <a-text value="Your Order" position="-0.49 1.14 -1.49" scale="0.2 0.2" align="left"></a-text>
+      <a-text id="order-price" value="0.00" position="0.49 1.14 -1.49" scale="0.2 0.2" align="right"></a-text>
       <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
-      <a-text value="Your Order" position="-0.39 1.05 -1.49" scale="0.15 0.15" align="left"></a-text>
       
       <!-- Menu item: burger -->
       <a-sphere button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 1.58 -1" >
