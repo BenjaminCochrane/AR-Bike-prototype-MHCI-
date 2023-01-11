@@ -9,7 +9,23 @@
       var order_total = 0.0;
       var order_count = 0;
       
+      function updateOrderValueLabel() {
+        document.querySelector('#order-price').setAttribute('value', order_total.toFixed(2));
+      }
+      
       var shakeEvent = new Shake({threshold: 15, timeout: 1000});
+      window.addEventListener('shake', shakeEventDetected, false);
+
+      function shakeEventDetected () {
+        // Clear the basket
+        document.querySelector('#basket').replaceChildren();
+        
+        order_total = 0.0;
+        order_count = 0;
+        
+        updateOrderValueLabel();
+      }
+      
       shakeEvent.start();
       
       AFRAME.registerComponent("button", {
@@ -45,7 +61,7 @@
             
             <!-- Update order price -->
             order_total += food_prices[data.item_id - 1];
-            document.querySelector('#order-price').setAttribute('value', order_total.toFixed(2));
+            updateOrderValueLabel();
             
             <!-- Calculate basket icon offset in x-axis -->
             var x_offset = -0.4 + order_count * 0.11;
