@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="shake.js"></script>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
@@ -13,20 +12,34 @@
         document.querySelector('#order-price').setAttribute('value', order_total.toFixed(2));
       }
       
-      var shakeEvent = new Shake({threshold: 15, timeout: 1000});
-      window.addEventListener('shake', shakeEventDetected, false);
+      AFRAME.registerComponent("clear-button", {
+        init: function () {
+          // Cursor enter: start or resume rotation animation, depending on prior animation state
+          element.addEventListener("mouseenter", function () {
+            
+          });
 
-      function shakeEventDetected () {
-        // Clear the basket
-        document.querySelector('#basket').replaceChildren();
-        
-        order_total = 0.0;
-        order_count = 0;
-        
-        updateOrderValueLabel();
-      }
-      
-      shakeEvent.start();
+          // Cursor leave: pause rotation animation
+          element.addEventListener("mouseleave", function () {
+            
+          });
+
+          // Cursor click: start the scale animation
+          element.addEventListener("click", function () {
+            
+          });
+        },
+          
+        tick: function () {
+          var element = this.el;
+          var rotationTmp = this.rotationTmp = this.rotationTmp || {x: 0, y: 0, z: 0};
+          var rotation = el.getAttribute('rotation');
+          rotationTmp.x = rotation.x + 0.1;
+          rotationTmp.y = rotation.y + 0.1;
+          rotationTmp.z = rotation.z + 0.1;
+          el.setAttribute('rotation', rotationTmp);
+        }
+      });
       
       AFRAME.registerComponent("button", {
         schema: {
@@ -127,10 +140,16 @@
         </a-entity>
       </a-entity>
 
+      <!-- Basket -->
       <a-text value="Your Order" position="-0.49 1.14 -1.49" scale="0.2 0.2" align="left"></a-text>
       <a-text id="order-price" value="0.00" position="0.49 1.14 -1.49" scale="0.2 0.2" align="right"></a-text>
       <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
-      <a-text value="shake device to clear order" position="0 0.87 -1.49" scale="0.15 0.15" align="center"></a-text>
+      
+      <!-- Clear order -->
+      <a-entity id="button_clear_container" visible="false">
+        <a-plane id="button_clear" color="red" opacity="0.2" width="0.14" height="0.2" position="0.57 1.0 -1.5"></a-plane>
+        <a-text value="clear" position="0.56 1.0 -1.49" scale="0.15 0.15" align="center"></a-text>
+      </a-entity>
       
       <!-- Menu item: burger -->
       <a-sphere button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 1.58 -1" >
