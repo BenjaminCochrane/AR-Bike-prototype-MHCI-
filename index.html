@@ -42,8 +42,9 @@
   <body>
     <a-scene>
       <a-assets>
-        <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673449251315"></a-asset-item>
-
+        <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
+        <a-asset-item id="model-chips" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/chips.gltf?v=1673470890597"></a-asset-item>
+        
         <a-mixin id="item-label" geometry="primitive: plane;" material="opacity: 0.0; transparent: true;" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 10;"></a-mixin>
       </a-assets>
 
@@ -53,18 +54,25 @@
       <a-entity camera look-controls wasd-controls position="0 1.6 0">
         <a-entity cursor="fuse: true; fuseTimeout: 800" raycaster="objects: .selectable"
                   material="color: white; shader: flat; opacity: 0.8;" position="0 0 -0.1"
-                  geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"
+                  geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.004"
                   animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 500; from: 0.2 0.2 0.2; to: 1 1 1"
                   animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 800; from: 1 1 1; to: 0.2 0.2 0.2"
                   animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1"
                   ></a-entity>
       </a-entity>
 
-      <a-sphere button class="selectable" position="-0.3 1.6 -1" scale="0.15 0.15 0.15" material="color: white; shader:flat; opacity: 0.2;">
-        <a-entity class="icon" gltf-model="#model-burger" position="0 -0.15 0" scale="2 2 2"
-                  animation__hover="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
-                  animation__click="property: scale; from: 1 1 1; to: 2 2 2; dur: 500; easing: linear; loop: false; startEvents: scale-begin;"></a-entity>
+      <a-sphere button class="selectable" position="-0.2 1.6 -1" scale="0.15 0.15 0.15" material="color: white; shader:flat; opacity: 0.2;">
+        <a-entity class="icon" gltf-model="#model-burger" position="0 -0.2 0" scale="5 5 5" rotation="15 0 0"
+                  animation__hover="property: rotation; to: 10 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
+                  animation__click="property: scale; from: 3 3 3; to: 5 5 5; dur: 500; easing: linear; loop: false; startEvents: scale-begin;"></a-entity>
         <a-entity mixin="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
+      </a-sphere>
+      
+      <a-sphere button class="selectable" position="0.2 1.6 -1" scale="0.15 0.15 0.15" material="color: white; shader:flat; opacity: 0.2;">
+        <a-entity class="icon" gltf-model="#model-chips" position="0 -0.15 0" scale="5 5 5"
+                  animation__hover="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
+                  animation__click="property: scale; from: 3 3 3; to: 5 5 5; dur: 500; easing: linear; loop: false; startEvents: scale-begin;"></a-entity>
+        <a-entity mixin="item-label" text="value: Chips 1.50;" position="0 -0.5 0.1"></a-entity>
       </a-sphere>
     </a-scene>
   </body>
