@@ -51,15 +51,16 @@
 
       <!-- Create cursor with animated visual feedback -->
       <a-entity camera look-controls wasd-controls position="0 1.6 0">
-        <a-entity cursor="fuse: true; fuseTimeout: 600" raycaster="objects: .selectable"
+        <a-entity cursor="fuse: true; fuseTimeout: 800" raycaster="objects: .selectable"
                   material="color: white; shader: flat; opacity: 0.8;" position="0 0 -0.1"
                   geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"
-                  animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 100; from: 0.1 0.1 0.1; to: 1 1 1"
-                  animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 600; from: 1 1 1; to: 0.1 0.1 0.1"
-                  animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1"></a-entity>
+                  animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 500; from: 0.2 0.2 0.2; to: 1 1 1"
+                  animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 800; from: 1 1 1; to: 0.2 0.2 0.2"
+                  animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1"
+                  ></a-entity>
       </a-entity>
 
-      <a-sphere button class="selectable" position="-0.3 1.6 -1" scale="0.15 0.15 0.15" material="color: white; opacity: 0.2;">
+      <a-sphere button class="selectable" position="-0.3 1.6 -1" scale="0.15 0.15 0.15" material="color: white; shader:flat; opacity: 0.2;">
         <a-entity class="icon" gltf-model="#model-burger" position="0 -0.15 0" scale="2 2 2"
                   animation__hover="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
                   animation__click="property: scale; from: 1 1 1; to: 2 2 2; dur: 500; easing: linear; loop: false; startEvents: scale-begin;"></a-entity>
