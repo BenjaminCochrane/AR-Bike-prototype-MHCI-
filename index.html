@@ -14,6 +14,8 @@
       
       AFRAME.registerComponent("clear-button", {
         init: function () {
+          var element = this.el;
+          
           // Cursor enter: start or resume rotation animation, depending on prior animation state
           element.addEventListener("mouseenter", function () {
             
@@ -32,12 +34,14 @@
           
         tick: function () {
           var element = this.el;
-          var rotationTmp = this.rotationTmp = this.rotationTmp || {x: 0, y: 0, z: 0};
-          var rotation = el.getAttribute('rotation');
-          rotationTmp.x = rotation.x + 0.1;
-          rotationTmp.y = rotation.y + 0.1;
-          rotationTmp.z = rotation.z + 0.1;
-          el.setAttribute('rotation', rotationTmp);
+          
+          var camera = this.el.sceneEl.camera.el;
+          var rotation = camera.getAttribute('rotation');
+          var opacity = Math.min(Math.min(rotation.x, 0) * -8.0, 100);
+          
+          console.log(opacity * 0.01);
+          
+          element.setAttribute('opacity', opacity * 0.01);
         }
       });
       
@@ -146,8 +150,8 @@
       <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
       
       <!-- Clear order -->
-      <a-entity id="button_clear_container" visible="false">
-        <a-plane id="button_clear" color="red" opacity="0.2" width="0.14" height="0.2" position="0.57 1.0 -1.5"></a-plane>
+      <a-entity clear-button opacity="0.0">
+        <a-plane color="red" opacity="0.2" width="0.14" height="0.2" position="0.57 1.0 -1.5"></a-plane>
         <a-text value="clear" position="0.56 1.0 -1.49" scale="0.15 0.15" align="center"></a-text>
       </a-entity>
       
