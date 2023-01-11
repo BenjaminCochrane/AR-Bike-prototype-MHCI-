@@ -2,56 +2,68 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
       var targeting = false;
-      
-      AFRAME.registerComponent('button', {
+
+      AFRAME.registerComponent("button", {
         schema: {
-          item_id: {default: '0'}
+          item_id: { default: "0" },
+          started: { default: false },
         },
-        
+
         init: function () {
           var data = this.data;
           var element = this.el;
 
-          element.addEventListener('mouseenter', function () {
+          // Cursor enter: start or resume rotation animation, depending on prior animation state
+          element.addEventListener("mouseenter", function () {
             if (!targeting) {
               targeted = true;
-              element.querySelector('.icon').emit(@)
+
+              if (data.started) {
+                element.querySelector(".icon").emit("rotation-resume");
+              } else {
+                data.started = true;
+                element.querySelector(".icon").emit("rotation-begin");
+              }
             }
           });
-          
-          element.addEventListener('mouseleave', function () {
-            element.querySelector('.icon').setAttribute('animation', '');
+
+          // Cursor leave: pause rotation animation
+          element.addEventListener("mouseleave", function () {
+            element.querySelector(".icon").emit("rotation-pause");
           });
-          
-          element.addEventListener('click', function () {
+
+          // Cursor click: start the scale animation
+          element.addEventListener("click", function () {
             if (targeting) {
-              element.querySelector('.icon').setAttribute('animation', 'property: scale; from: 0.3 0.3 0.3; to: 1 1 1; dur: 500; easing: linear; loop: false;');
+              element.querySelector(".icon").emit("scale-begin");
             }
           });
-        }
+        },
       });
     </script>
   </head>
-  <body>    
+  <body>
     <a-scene>
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673449251315"></a-asset-item>
-        
+
         <a-mixin id="item-label" geometry="primitive: plane;" material="opacity: 0.0; transparent: true;" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 10;"></a-mixin>
       </a-assets>
-      
+
       <a-sky color="#005398"></a-sky>
-      
+
       <!-- Create cursor with animated visual feedback -->
       <a-entity camera look-controls wasd-controls position="0 1.6 0">
-        <a-entity cursor material="color: white; shader: flat; opacity: 0.8;" position="0 0 -0.1" geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"></a-entity>
+        <a-entity cursor raycaster="objects: .selectable" material="color: white; shader: flat; opacity: 0.8;" position="0 0 -0.1" geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005" ></a-entity>
       </a-entity>
-      
-      <a-sphere button position="-0.3 1.6 -1" scale="0.15 0.15 0.15" material="color: white; opacity: 0.2;">
-        <a-entity class="icon" gltf-model="#model-burger" position="0 -0.15 0" scale="2 2 2" animation="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"></a-entity>
+
+      <a-sphere button class="selectable" position="-0.3 1.6 -1" scale="0.15 0.15 0.15" material="color: white; opacity: 0.2;">
+        <a-entity class="icon" gltf-model="#model-burger" position="0 -0.15 0" scale="2 2 2"
+                  animation__hover="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
+                  animation__click="property: scale; from: 1 1 1; to: 2 2 2; dur: 500; easing: linear; loop: false; startEvents: scale-begin;"></a-entity>
         <a-entity mixin="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
       </a-sphere>
     </a-scene>
