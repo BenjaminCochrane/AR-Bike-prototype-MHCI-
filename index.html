@@ -37,11 +37,12 @@
           
           var camera = this.el.sceneEl.camera.el;
           var rotation = camera.getAttribute('rotation');
-          var opacity = Math.min(Math.min(rotation.x, 0) * -8.0, 100);
+          var opacity = Math.min(Math.min(rotation.x + 5.0, 0) * -5.0, 50);
           
-          console.log(opacity * 0.01);
-          
-          element.setAttribute('opacity', opacity * 0.01);
+          var children = element.children;
+          for (var i = 0; i < children.length; i++) {
+            children[i].setAttribute('opacity', opacity * 0.01);
+          }
         }
       });
       
