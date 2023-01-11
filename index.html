@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="shake.js"></script>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
       var food_prices = [3.50, 1.50, 1.00];
       var order_total = 0.0;
       var order_count = 0;
+      
+      var shakeEvent = new Shake({threshold: 15, timeout: 1000});
+      shakeEvent.start();
       
       AFRAME.registerComponent("button", {
         schema: {
@@ -39,12 +43,15 @@
           element.addEventListener("click", function () {
             element.querySelector(".icon").emit("scale-begin");
             
-            <!-- Create new icon entity to add to basket -->
+            <!-- Update order price -->
+            order_total += food_prices[data.item_id - 1];
+            document.querySelector('#order-price').setAttribute('value', order_total.toFixed(2));
+            
+            <!-- Calculate basket icon offset in x-axis -->
             var x_offset = -0.4 + order_count * 0.11;
             order_count++;
             
-            order_total += food_prices[data.item_id - 1];
-            
+            <!-- Create new icon entity to add to basket -->
             var icon_entity = document.createElement('a-entity');
             icon_entity.setAttribute('position', x_offset + ' -0.06 0');
             icon_entity.setAttribute('rotation', '0 0 0');
@@ -107,6 +114,7 @@
       <a-text value="Your Order" position="-0.49 1.14 -1.49" scale="0.2 0.2" align="left"></a-text>
       <a-text id="order-price" value="0.00" position="0.49 1.14 -1.49" scale="0.2 0.2" align="right"></a-text>
       <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
+      <a-text value="shake device to clear order" position="0 0.87 -1.49" scale="0.15 0.15" align="center"></a-text>
       
       <!-- Menu item: burger -->
       <a-sphere button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 1.58 -1" >
