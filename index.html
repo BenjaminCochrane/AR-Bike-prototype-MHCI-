@@ -59,7 +59,7 @@
           var rotation = camera.getAttribute("rotation");
           
           // Calculate opacity based on downward tilt (rotation around x-axis), with a maximum of 50%
-          var opacity = Math.min(Math.min(rotation.x + 10.0, 0) * -5.0, 50);
+          var opacity = 50;
           
           // Set background opacity - note opacity needs to be converted from % to [0.0, 1.0]
           element.querySelector("#clear-button-bg").setAttribute("opacity", opacity * 0.01);
@@ -84,57 +84,17 @@
 
           // Cursor enter: start or resume rotation animation, depending on prior animation state
           element.addEventListener("mouseenter", function () {
-            targeted = true;
-
-            if (data.started) {
-              element.querySelector(".icon").emit("rotation-resume");
-            } else {
-              data.started = true;
-              element.querySelector(".icon").emit("rotation-begin");
-            }
+            
           });
 
           // Cursor leave: pause rotation animation
           element.addEventListener("mouseleave", function () {
-            element.querySelector(".icon").emit("rotation-pause");
+            
           });
 
           // Cursor click: start the scale animation
           element.addEventListener("click", function () {
-            element.querySelector(".icon").emit("scale-begin");
             
-            // Update order price
-            order_total += food_prices[data.item_id - 1];
-            updateOrderValueLabel();
-            
-            // Calculate basket icon offset in x-axis
-            var x_offset = -0.4 + order_count * 0.11;
-            order_count++;
-            
-            // Create new icon entity to add to basket
-            var icon_entity = document.createElement("a-entity");
-            icon_entity.setAttribute("position", x_offset + " -0.06 0");
-            icon_entity.setAttribute("rotation", "0 0 0");
-            icon_entity.setAttribute("animation", "property: rotation; to: 0 360 0; dur: 6000; easing: linear; loop: true;");
-            
-            // Select and scale the appropriate model for adding to basket
-            switch (data.item_id) {
-              case "1":
-                icon_entity.setAttribute("gltf-model", "#model-burger");
-                icon_entity.setAttribute("scale", "0.5 0.5 0.5");
-                break;
-              case "2":
-                icon_entity.setAttribute("gltf-model", "#model-chips");
-                icon_entity.setAttribute("scale", "0.6 0.6 0.6");
-                break;
-              case "3":
-                icon_entity.setAttribute("gltf-model", "#model-drink");
-                icon_entity.setAttribute("scale", "0.42 0.42 0.42");
-                break;
-            }
-            
-            // Add new icon as a child of the basket entity
-            document.querySelector("#basket").appendChild(icon_entity);
           });
         },
       });
