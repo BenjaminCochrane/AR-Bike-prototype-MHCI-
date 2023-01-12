@@ -121,7 +121,7 @@
         <a-asset-item id="model-drink" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/drink.gltf?v=1673471242511"></a-asset-item>
         
         <!-- Target sphere surrounding each menu item -->
-        <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.0;" scale="0.15 0.15 0.15"></a-mixin>
+        <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.1;" scale="0.15 0.15 0.15"></a-mixin>
         
         <!-- 3D model icon for menu items -->
         <a-mixin id="item-icon" scale="5 5 5"
@@ -151,9 +151,9 @@
       <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
       
       <!-- Clear order -->
-      <a-entity clear-button opacity="0.0">
-        <a-plane color="red" opacity="0.2" width="0.14" height="0.2" position="0.57 1.0 -1.5"></a-plane>
-        <a-text value="clear" position="0.56 1.0 -1.49" scale="0.15 0.15" align="center"></a-text>
+      <a-entity clear-button position="0. 0.8 -1.49">
+        <a-plane color="darkred" width="0.4" height="0.12"></a-plane>
+        <a-text value="clear" position="0 0 0.01" scale="0.15 0.15" align="center"></a-text>
       </a-entity>
       
       <!-- Menu item: burger -->
