@@ -4,31 +4,36 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
+      // Global variables
       var food_prices = [3.50, 1.50, 1.00];
       var order_total = 0.0;
       var order_count = 0;
       
       function updateOrderValueLabel() {
-        document.querySelector('#order-price').setAttribute('value', order_total.toFixed(2));
+        document.querySelector("#order-price").setAttribute("value", order_total.toFixed(2));
       }
       
       AFRAME.registerComponent("clear-button", {
         init: function () {
           var element = this.el;
           
-          // Cursor enter: start or resume rotation animation, depending on prior animation state
+          // Cursor enter
           element.addEventListener("mouseenter", function () {
             
           });
 
-          // Cursor leave: pause rotation animation
+          // Cursor leave
           element.addEventListener("mouseleave", function () {
             
           });
 
-          // Cursor click: start the scale animation
+          // Cursor click: empty order basket
           element.addEventListener("click", function () {
+            order_total = 0.0;
+            order_count = 0;
+            updateOrderValueLabel();
             
+            document.querySelector("#basket").replaceChildren();
           });
         },
           
@@ -36,13 +41,16 @@
           var element = this.el;
           
           var camera = this.el.sceneEl.camera.el;
-          var rotation = camera.getAttribute('rotation');
-          var opacity = Math.min(Math.min(rotation.x + 5.0, 0) * -5.0, 50);
+          var rotation = camera.getAttribute("rotation");
           
-          var children = element.children;
-          for (var i = 0; i < children.length; i++) {
-            children[i].setAttribute('opacity', opacity * 0.01);
-          }
+          // Calculate opacity based on downward tilt, with a maximum of 50%
+          var opacity = Math.min(Math.min(rotation.x + 10.0, 0) * -5.0, 50);
+          
+          // Set background opacity - note opacity needs to be converted from % to [0.0, 1.0]
+          element.querySelector("#clear-button-bg").setAttribute("opacity", opacity * 0.01);
+          
+          // Set text opacity - use different scale so it"s brighter, for better readability
+          element.querySelector("#clear-button-fg").setAttribute("opacity", opacity * 0.02);
         }
       });
       
@@ -86,28 +94,28 @@
             order_count++;
             
             <!-- Create new icon entity to add to basket -->
-            var icon_entity = document.createElement('a-entity');
-            icon_entity.setAttribute('position', x_offset + ' -0.06 0');
-            icon_entity.setAttribute('rotation', '0 0 0');
-            icon_entity.setAttribute('animation', 'property: rotation; to: 0 360 0; dur: 6000; easing: linear; loop: true;');
+            var icon_entity = document.createElement("a-entity");
+            icon_entity.setAttribute("position", x_offset + " -0.06 0");
+            icon_entity.setAttribute("rotation", "0 0 0");
+            icon_entity.setAttribute("animation", "property: rotation; to: 0 360 0; dur: 6000; easing: linear; loop: true;");
             
             switch (data.item_id) {
               case "1":
-                icon_entity.setAttribute('gltf-model', '#model-burger');
-                icon_entity.setAttribute('scale', '0.5 0.5 0.5');
+                icon_entity.setAttribute("gltf-model", "#model-burger");
+                icon_entity.setAttribute("scale", "0.5 0.5 0.5");
                 break;
               case "2":
-                icon_entity.setAttribute('gltf-model', '#model-chips');
-                icon_entity.setAttribute('scale', '0.6 0.6 0.6');
+                icon_entity.setAttribute("gltf-model", "#model-chips");
+                icon_entity.setAttribute("scale", "0.6 0.6 0.6");
                 break;
               case "3":
-                icon_entity.setAttribute('gltf-model', '#model-drink');
-                icon_entity.setAttribute('scale', '0.42 0.42 0.42');
+                icon_entity.setAttribute("gltf-model", "#model-drink");
+                icon_entity.setAttribute("scale", "0.42 0.42 0.42");
                 break;
             }
             
             <!-- Add new icon as a child of the basket entity -->
-            document.querySelector('#basket').appendChild(icon_entity);
+            document.querySelector("#basket").appendChild(icon_entity);
           });
         },
       });
@@ -151,9 +159,9 @@
       <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
       
       <!-- Clear order -->
-      <a-entity clear-button position="0. 0.8 -1.49">
-        <a-plane color="darkred" width="0.4" height="0.12"></a-plane>
-        <a-text value="clear" position="0 0 0.01" scale="0.15 0.15" align="center"></a-text>
+      <a-entity clear-button position="0. 0.845 -1.49">
+        <a-plane id="clear-button-bg" class="selectable" color="darkred" width="0.4" height="0.12"></a-plane>
+        <a-text id="clear-button-fg" value="clear" position="0 0 0.01" scale="0.15 0.15" align="center"></a-text>
       </a-entity>
       
       <!-- Menu item: burger -->
