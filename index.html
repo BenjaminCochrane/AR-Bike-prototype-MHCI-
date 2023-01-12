@@ -4,16 +4,30 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
-      // Global variables
+      // Global variables: store food order data
       var food_prices = [3.50, 1.50, 1.00];
       var order_total = 0.0;
       var order_count = 0;
       
+      // Update the order value label to current total
       function updateOrderValueLabel() {
         document.querySelector("#order-price").setAttribute("value", order_total.toFixed(2));
       }
       
+      // Clear all items from the order
+      function clearOrder() {
+        order_total = 0.0;
+        order_count = 0;
+        updateOrderValueLabel();
+        
+        document.querySelector("#basket").replaceChildren();
+      }
+      
+      /*
+       * Component for the 'clear order' button.
+       */
       AFRAME.registerComponent("clear-button", {
+        // Init gets called just once, when initialised
         init: function () {
           var element = this.el;
           
@@ -29,21 +43,22 @@
 
           // Cursor click: empty order basket
           element.addEventListener("click", function () {
-            order_total = 0.0;
-            order_count = 0;
-            updateOrderValueLabel();
-            
-            document.querySelector("#basket").replaceChildren();
+            clearOrder();
           });
         },
-          
+        
+        /*
+         * Tick gets called every frame update. We want to create the effect of the clear
+         * button fading-in to become visible only as the user 'looks down' towards it.
+         */
         tick: function () {
           var element = this.el;
           
+          // We need the camera to determine where the user is looking
           var camera = this.el.sceneEl.camera.el;
           var rotation = camera.getAttribute("rotation");
           
-          // Calculate opacity based on downward tilt, with a maximum of 50%
+          // Calculate opacity based on downward tilt (rotation around x-axis), with a maximum of 50%
           var opacity = Math.min(Math.min(rotation.x + 10.0, 0) * -5.0, 50);
           
           // Set background opacity - note opacity needs to be converted from % to [0.0, 1.0]
@@ -54,7 +69,10 @@
         }
       });
       
-      AFRAME.registerComponent("button", {
+      /*
+       * Component for food menu item buttons.
+       */
+      AFRAME.registerComponent("menu-button", {
         schema: {
           item_id: { default: "0" },
           started: { default: false },
@@ -85,20 +103,21 @@
           element.addEventListener("click", function () {
             element.querySelector(".icon").emit("scale-begin");
             
-            <!-- Update order price -->
+            // Update order price
             order_total += food_prices[data.item_id - 1];
             updateOrderValueLabel();
             
-            <!-- Calculate basket icon offset in x-axis -->
+            // Calculate basket icon offset in x-axis
             var x_offset = -0.4 + order_count * 0.11;
             order_count++;
             
-            <!-- Create new icon entity to add to basket -->
+            // Create new icon entity to add to basket
             var icon_entity = document.createElement("a-entity");
             icon_entity.setAttribute("position", x_offset + " -0.06 0");
             icon_entity.setAttribute("rotation", "0 0 0");
             icon_entity.setAttribute("animation", "property: rotation; to: 0 360 0; dur: 6000; easing: linear; loop: true;");
             
+            // Select and scale the appropriate model for adding to basket
             switch (data.item_id) {
               case "1":
                 icon_entity.setAttribute("gltf-model", "#model-burger");
@@ -114,7 +133,7 @@
                 break;
             }
             
-            <!-- Add new icon as a child of the basket entity -->
+            // Add new icon as a child of the basket entity
             document.querySelector("#basket").appendChild(icon_entity);
           });
         },
@@ -123,6 +142,7 @@
   </head>
   <body>
     <a-scene>
+      <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
         <a-asset-item id="model-chips" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/chips.gltf?v=1673470890597"></a-asset-item>
@@ -140,6 +160,7 @@
         <a-mixin id="item-label" geometry="primitive: plane;" material="opacity: 0.0;" scale="1.5 1.5 1.5" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 10;"></a-mixin>
       </a-assets>
 
+      <!-- Sky fills the background with a solid colour -->
       <a-sky color="#518CC9"></a-sky>
 
       <!-- Create cursor with animated visual feedback -->
@@ -164,23 +185,25 @@
         <a-text id="clear-button-fg" value="clear" position="0 0 0.01" scale="0.15 0.15" align="center"></a-text>
       </a-entity>
       
-      <!-- Menu item: burger -->
-      <a-sphere button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 1.58 -1" >
-        <a-entity mixin="item-icon" class="icon" gltf-model="#model-burger" position="0 -0.2 0" scale="5 5 5"></a-entity>
-        <a-entity mixin="item-label" class="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
-      </a-sphere>
-      
-      <!-- Menu item: chips -->
-      <a-sphere button="item_id: 2;" mixin="item-sphere" class="selectable" position="0.22 1.58 -1">
-        <a-entity mixin="item-icon" class="icon" gltf-model="#model-chips" position="0 -0.15 0" scale="5 5 5"></a-entity>
-        <a-entity mixin="item-label" text="value: Chips 1.50;" position="0 -0.5 0.1"></a-entity>
-      </a-sphere>
-      
-      <!-- Menu item: drink -->
-      <a-sphere button="item_id: 3;" mixin="item-sphere"  class="selectable" position="0.0 1.82 -1" rotation="30 0 0">
-        <a-entity mixin="item-icon" class="icon" gltf-model="#model-drink" position="0 -0.22 0"></a-entity>
-        <a-entity mixin="item-label" text="value: Drink 1.00;" position="0 -0.5 0.1"></a-entity>
-      </a-sphere>
+      <a-entity id="menu-items" position="0 1.6 -1">
+        <!-- Menu item: burger -->
+        <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 0 0" rotation="0 20 0">
+          <a-entity mixin="item-icon" class="icon" gltf-model="#model-burger" position="0 -0.2 0" scale="5 5 5"></a-entity>
+          <a-entity mixin="item-label" class="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
+        </a-sphere>
+
+        <!-- Menu item: chips -->
+        <a-sphere menu-button="item_id: 2;" mixin="item-sphere" class="selectable" position="0.22 0 0" rotation="0 -20 0">
+          <a-entity mixin="item-icon" class="icon" gltf-model="#model-chips" position="0 -0.15 0" scale="5 5 5"></a-entity>
+          <a-entity mixin="item-label" text="value: Chips 1.50;" position="0 -0.5 0.1"></a-entity>
+        </a-sphere>
+
+        <!-- Menu item: drink -->
+        <a-sphere menu-button="item_id: 3;" mixin="item-sphere"  class="selectable" position="0.0 0.25 0" rotation="20 0 0">
+          <a-entity mixin="item-icon" class="icon" gltf-model="#model-drink" position="0 -0.22 0"></a-entity>
+          <a-entity mixin="item-label" text="value: Drink 1.00;" position="0 -0.5 0.1"></a-entity>
+        </a-sphere>
+      </a-entity>
     </a-scene>
   </body>
 </html>
