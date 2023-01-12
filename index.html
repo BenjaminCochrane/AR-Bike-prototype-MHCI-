@@ -145,8 +145,6 @@
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
-        <a-asset-item id="model-chips" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/chips.gltf?v=1673470890597"></a-asset-item>
-        <a-asset-item id="model-drink" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/drink.gltf?v=1673471242511"></a-asset-item>
         
         <!-- Target sphere surrounding each menu item -->
         <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.1;" scale="0.15 0.15 0.15"></a-mixin>
@@ -187,21 +185,9 @@
       
       <a-entity id="menu-items" position="0 1.6 -1">
         <!-- Menu item: burger -->
-        <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.22 0 0" rotation="0 20 0">
+        <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="0 0 0" rotation="0 0 0">
           <a-entity mixin="item-icon" class="icon" gltf-model="#model-burger" position="0 -0.2 0" scale="5 5 5"></a-entity>
           <a-entity mixin="item-label" class="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
-        </a-sphere>
-
-        <!-- Menu item: chips -->
-        <a-sphere menu-button="item_id: 2;" mixin="item-sphere" class="selectable" position="0.22 0 0" rotation="0 -20 0">
-          <a-entity mixin="item-icon" class="icon" gltf-model="#model-chips" position="0 -0.15 0" scale="5 5 5"></a-entity>
-          <a-entity mixin="item-label" text="value: Chips 1.50;" position="0 -0.5 0.1"></a-entity>
-        </a-sphere>
-
-        <!-- Menu item: drink -->
-        <a-sphere menu-button="item_id: 3;" mixin="item-sphere"  class="selectable" position="0.0 0.25 0" rotation="20 0 0">
-          <a-entity mixin="item-icon" class="icon" gltf-model="#model-drink" position="0 -0.22 0"></a-entity>
-          <a-entity mixin="item-label" text="value: Drink 1.00;" position="0 -0.5 0.1"></a-entity>
         </a-sphere>
       </a-entity>
     </a-scene>
