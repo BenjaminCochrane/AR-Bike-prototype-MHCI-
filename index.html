@@ -116,6 +116,8 @@
         
         <!-- Text label for menu items -->
         <a-mixin id="item-label" geometry="primitive: plane;" material="opacity: 0.0;" scale="1.5 1.5 1.5" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 10;"></a-mixin>
+        <a-mixin id="menu-item" geometry="width: 2; height: 1;" material="color: #003865" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 15;"></a-mixin>
+        
       </a-assets>
 
       <!-- Sky fills the background with a solid colour -->
@@ -131,6 +133,8 @@
                   animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1">
         </a-entity>
       </a-entity>
+      
+      <a-plane mixin="menu-item" position="-1.2  0.75 -5" text="value: Burger" button="item_id: 1"></a-plane>
 
       <!-- Basket -->
       <a-text value="Your Order" position="-0.49 1.14 -1.49" scale="0.2 0.2" align="left"></a-text>
