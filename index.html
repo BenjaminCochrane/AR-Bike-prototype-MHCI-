@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-map/dist/aframe-map.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
       // Global variables: store food order data
@@ -108,7 +109,7 @@
         <a-asset-item id="map" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/map.jpg?v=1673470710342"></a-asset-item>
         
         <!-- Target sphere surrounding each menu item -->
-        <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.1;" scale="0.15 0.15 0.15"></a-mixin>
+        <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.3;" scale="0.15 0.15 0.15"></a-mixin>
         
         <!-- 3D model icon for menu items -->
         <a-mixin id="item-icon" scale="5 5 5"
