@@ -112,7 +112,7 @@
     </script>
   </head>
   <body>
-    <a-scene render-order="HUD, test-objects">
+    <a-scene render-order="HUD, test-objects, floor">
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
@@ -134,8 +134,9 @@
 
       <!-- Sky fills the background with a solid colour -->
       <a-sky color="#518CC9"></a-sky>
+      <a-plane id="floor" position ="0 0 -4" rotation ="-90 0 0" width="40" height="40" color="#7BC8A4"></a-plane>
 
-      <!-- lovely colour, cheers, Is that supposed to be the ground????-->
+      <!-- lovely colour, cheers, Is that supposed to be the ground???? yes lol-->
       
       <!-- Create cursor with animated visual feedback -->
       <a-entity camera look-controls wasd-controls position="0 1.6 0">
@@ -160,7 +161,6 @@
       
       
       <a-entity id="test-objects" position="0 1.6 -1">
-
         <a-circle menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.6 0.6 0" rotation="0 0 0">
           <a-entity mixin="item-icon" class="icon" gltf-model="#map" position="0 0.2 0" scale="5 5 5"></a-entity>
         </a-circle>
