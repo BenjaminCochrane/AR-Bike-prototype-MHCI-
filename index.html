@@ -105,6 +105,7 @@
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
+        <a-asset-item id="map" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/map.jpg?v=1673470710342"></a-asset-item>
         
         <!-- Target sphere surrounding each menu item -->
         <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.1;" scale="0.15 0.15 0.15"></a-mixin>
@@ -116,7 +117,7 @@
         
         <!-- Text label for menu items -->
         <a-mixin id="item-label" geometry="primitive: plane;" material="opacity: 0.0;" scale="1.5 1.5 1.5" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 10;"></a-mixin>
-        <a-mixin id="menu-item" geometry="width: 2; height: 1;" material="color: #003865" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 15;"></a-mixin>
+        <a-mixin id="menu-item" geometry="width: 2; height: 2;" material="color: #003865" text="align: center; anchor: center; baseline: center; color: white; wrap-count: 15;"></a-mixin>
         
       </a-assets>
 
@@ -134,23 +135,21 @@
         </a-entity>
       </a-entity>
       
-      <a-plane mixin="menu-item" position="-1.2  0.75 -5" text="value: Burger" button="item_id: 1"></a-plane>
+      <a-plane mixin="menu-item" position="-3  5 -5" text="value: Burger" button="item_id: 1"></a-plane>
 
-      <!-- Basket -->
-      <a-text value="Your Order" position="-0.49 1.14 -1.49" scale="0.2 0.2" align="left"></a-text>
-      <a-text id="order-price" value="0.00" position="0.49 1.14 -1.49" scale="0.2 0.2" align="right"></a-text>
-      <a-plane id="basket" color="black" opacity="0.2" width="1.0" height="0.2" position="0 1.0 -1.5"></a-plane>
       
-      <!-- Clear order -->
-      <a-entity clear-button position="0. 0.845 -1.49">
-        <a-plane id="clear-button-bg" class="selectable" color="darkred" width="0.4" height="0.12"></a-plane>
-        <a-text id="clear-button-fg" value="clear" position="0 0 0.01" scale="0.15 0.15" align="center"></a-text>
-      </a-entity>
+      
+      
       
       <a-entity id="menu-items" position="0 1.6 -1">
         <!-- Menu item: burger -->
         <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="0 0 0" rotation="0 0 0">
           <a-entity mixin="item-icon" class="icon" gltf-model="#model-burger" position="0 -0.2 0" scale="5 5 5"></a-entity>
+          <a-entity mixin="item-label" class="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
+        </a-sphere>
+        
+        <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="0.4 0 0" rotation="0 0 0">
+          <a-entity mixin="item-icon" class="icon" gltf-model="#map" position="0 -0.2 0" scale="5 5 5"></a-entity>
           <a-entity mixin="item-label" class="item-label" text="value: Burger 3.50;" position="0 -0.5 0.1"></a-entity>
         </a-sphere>
       </a-entity>
