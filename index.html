@@ -142,12 +142,13 @@
       
       
       <a-entity id="menu-items" position="0 1.6 -1">
-        <!-- Menu item: burger -->
-        <img id="map">
         
-        <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.6 0.6 0" rotation="0 0 0">
+
+        <a-circle menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.6 0.6 0" rotation="0 0 0">
+          <a-image src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
+                 ></a-image>
           <a-entity mixin="item-icon" class="icon" gltf-model="#map" position="0 0.2 0" scale="5 5 5"></a-entity>
-        </a-sphere>
+        </a-circle>
       </a-entity>
     </a-scene>
   </body>
