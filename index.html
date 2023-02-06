@@ -23,6 +23,17 @@
         document.querySelector("#basket").replaceChildren();
       }
       
+      // Overlay componenet for HUD so that the hud 
+      // objects won't clip through test objects
+      AFRAME.registerComponent("overlay", {
+        dependencies: ['material'],
+        init: function () {
+          this.el.sceneEl.renderer.sortObjects = true;
+          this.el.object3D.renderOrder = 100;
+          this.el.components.material.material.depthTest = false;
+        }
+      });
+      
       /*
        * Component for the 'clear order' button.
        */
@@ -101,7 +112,7 @@
     </script>
   </head>
   <body>
-    <a-scene>
+    <a-scene render-order="HUD, test-objects">
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
@@ -123,7 +134,6 @@
 
       <!-- Sky fills the background with a solid colour -->
       <a-sky color="#518CC9"></a-sky>
-      <a-plane position ="0 0 -4" rotation ="-90 0 0" width="40" height="40" color="#7BC8A4"></a-plane>
 
       <!-- lovely colour, cheers, Is that supposed to be the ground????-->
       
@@ -138,10 +148,10 @@
         </a-entity>
       </a-entity>
       
-      <a-entity camera look-controls wasd-controls position="0 1.6 0">
-        <a-image id="hud" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
+      <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
+        <a-image id="hudMap" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
                  overlay rotation="0 0 0" position="-1.1 1.15 -2" width="1" height="1" material="opacity: 0.8"></a-image>
-        <a-image id="hud1" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/spotify.jpg?v=1675688231794"
+        <a-image id="hudMusic" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/spotify.jpg?v=1675688231794"
                  overlay rotation="0 0 0" position="-1 -1.35 -2" width="1.2" height="0.6" material="opacity: 0.8"></a-image>
       </a-entity>
 
@@ -149,8 +159,7 @@
       
       
       
-      <a-entity id="menu-items" position="0 1.6 -1">
-        
+      <a-entity id="test-objects" position="0 1.6 -1">
 
         <a-circle menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.6 0.6 0" rotation="0 0 0">
           <a-entity mixin="item-icon" class="icon" gltf-model="#map" position="0 0.2 0" scale="5 5 5"></a-entity>
