@@ -105,7 +105,7 @@
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <a-asset-item id="model-burger" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/burger.gltf?v=1673470710342"></a-asset-item>
-        <a-asset-item id="map" src="https://cdn.glitch.global/326e3dc1-eeff-4f02-8913-b8b16b58dbfd/map.jpg?v=1673470710342"></a-asset-item>
+        <a-assest-item id="map" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"></a-assest-item>
         
         <!-- Target sphere surrounding each menu item -->
         <a-mixin id="item-sphere" button geometry="primitive: sphere;" material="color: white; opacity: 0.3;" scale="0.15 0.15 0.15"></a-mixin>
@@ -143,7 +143,7 @@
       
       <a-entity id="menu-items" position="0 1.6 -1">
         <!-- Menu item: burger -->
-        
+        <img id="map">
         
         <a-sphere menu-button="item_id: 1;" mixin="item-sphere" class="selectable" position="-0.6 0.6 0" rotation="0 0 0">
           <a-entity mixin="item-icon" class="icon" gltf-model="#map" position="0 0.2 0" scale="5 5 5"></a-entity>
