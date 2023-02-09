@@ -3,6 +3,7 @@
   <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
     <script>
       // Global variables: store food order data
       var food_prices = [3.50, 1.50, 1.00];
@@ -80,9 +81,20 @@
         }
       });
       
+      //google maps api conversion to aframe -in progress
       AFRAME.registerComponent('googleMap', {
-        schema: {item_id:}
+        schema: {object_id:""},
+        
+        init: function(){
+          var mapProp= {
+          center:new google.maps.LatLng(51.508742,-0.120850),
+          zoom:5,
+          };
+          var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        }
+        
       })
+      // still in progress
       
       /*
        * Component for food menu item buttons.
@@ -153,6 +165,7 @@
         </a-entity>
       </a-entity>
       
+      Main HUD display
       <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
         <a-image id="hudMap" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
                  overlay rotation="0 0 0" position="-1.1 1.15 -2" width="1" height="1" material="opacity: 0.8"></a-image>
@@ -160,25 +173,17 @@
                  overlay rotation="0 0 0" position="-1 -1.35 -2" width="1.2" height="0.6" material="opacity: 0.8"></a-image>
       </a-entity>
       
+<!--       Objects for hand tracking in aframe -->
       <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
       <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
       
+<!--       google maps api still in progress -->
       <a-entity>
         <div id="googleMap" style="width:100%;height:400px;"></div>
 
-        <script>
-        function myMap() {
-        var mapProp= {
-          center:new google.maps.LatLng(51.508742,-0.120850),
-          zoom:5,
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }
-        </script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
       </a-entity>
-      
+<!--       Still in progress -->
       
       
       
