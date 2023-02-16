@@ -84,7 +84,6 @@
         ></a-mixin>
       </a-assets>
       
-      <a-map position="0 0 -5"></a-map>
 
       <!-- Sky fills the background with a solid colour -->
       <a-sky color="#518CC9"></a-sky>
@@ -111,11 +110,42 @@
         >
         </a-entity>
       </a-entity>
+      <!-- trying hand gestures here -->
+      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc handModelStyle=toon"></a-entity>
 
       <!--       Main HUD display -->
       <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
         
-        <a-plane text="value: New Message from Mum:\nBeeseChurger; align: center; anchor: center; baseline: center; color: white; wrap-count: 15;" position="0.8 1.4 -2" color="#003865" id="menu-item" geometry="width: 1; height: 0.5;" material="color: #003865"></a-plane>
+        <a-plane 
+           text="value: New Message from Mother:\nBeeseChurger \n Motherfucker\n Fuck you;
+                 align: center; 
+                 anchor: center; 
+                 baseline: center; 
+                 color: white; 
+                 wrap-count: 15;" 
+           overlay
+           position="0.8 1.4 -2" 
+           color="#003865" 
+           id="hudMessages" 
+           geometry="width: 1; height: 0.5;" 
+           material="color: #003865"
+          ></a-plane>
+        
+        <a-plane 
+           text="value: New Message from Mother:\nBeeseChurger \n Motherfucker\n Fuck you;
+                 align: center; 
+                 anchor: center; 
+                 baseline: center; 
+                 color: white; 
+                 wrap-count: 15;
+                 font" 
+           overlay
+           position="0.8 -1.4 -2" 
+           color="#003865" 
+           id="hudMessages" 
+           geometry="width: 1; height: 0.5;" 
+           material="color: #003865"
+          ></a-plane>
     
         <a-image
           id="hudMap"
@@ -139,19 +169,6 @@
         ></a-image>
       </a-entity>
       
-
-      <!--       Objects for hand tracking in aframe -->
-      <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
-      <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
-
-      <!--       google maps api still in progress -->
-      <a-entity
-        id="googleMap"
-        style="width: 100%; height: 400px"
-        position="0 2 0"
-      >
-      </a-entity>
-      <!--       Still in progress^ -->
 
       <a-entity id="test-objects" position="0 1.6 -1">
         <a-circle
