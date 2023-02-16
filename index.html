@@ -3,7 +3,7 @@
   <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+
     <script>
       // Overlay componenet for HUD so that the hud
       // objects won't clip through test objects
@@ -15,26 +15,6 @@
           this.el.components.material.material.depthTest = false;
         },
       });
-
-      /*
-       * Component for the 'clear order' button.
-       */
-      AFRAME.registerComponent("clear-button", {
-        // Init gets called just once, when initialised
-        init: function () {
-          var element = this.el;
-
-          // Cursor enter
-          element.addEventListener("mouseenter", function () {});
-
-          // Cursor leave
-          element.addEventListener("mouseleave", function () {});
-
-          // Cursor click: empty order basket
-          element.addEventListener("click", function () {
-            clearOrder();
-          });
-        },
 
         /*
          * Tick gets called every frame update. We want to create the effect of the clear
@@ -77,7 +57,6 @@
           );
         },
       });
-
     </script>
   </head>
   <body>
@@ -96,29 +75,6 @@
           geometry="primitive: sphere;"
           material="color: white; opacity: 0.3;"
           scale="0.15 0.15 0.15"
-        ></a-mixin>
-
-        <!-- 3D model icon for menu items -->
-        <a-mixin
-          id="item-icon"
-          scale="5 5 5"
-          animation__hover="property: rotation; to: 0 360 0; dur: 4000; easing: linear; loop: true; startEvents: rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"
-          animation__click="property: scale; from: 3 3 3; to: 5 5 5; dur: 500; easing: linear; loop: false; startEvents: scale-begin;"
-        ></a-mixin>
-
-        <!-- Text label for menu items -->
-        <a-mixin
-          id="item-label"
-          geometry="primitive: plane;"
-          material="opacity: 0.0;"
-          scale="1.5 1.5 1.5"
-          text="align: center; anchor: center; baseline: center; color: white; wrap-count: 10;"
-        ></a-mixin>
-        <a-mixin
-          id="menu-item"
-          geometry="width: 2; height: 2;"
-          material="color: #003865"
-          text="align: center; anchor: center; baseline: center; color: white; wrap-count: 15;"
         ></a-mixin>
       </a-assets>
 
@@ -150,6 +106,7 @@
 
       <!--       Main HUD display -->
       <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
+        
         <a-image
           id="hudMap"
           src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
@@ -200,6 +157,7 @@
             position="0 0.2 0"
             scale="5 5 5"
           ></a-entity>
+        <a-plane mixin="menu-item" position="-1.2  0.75 -5" text="value: Burger" button="item_id: 1"></a-plane>
         </a-circle>
       </a-entity>
     </a-scene>
