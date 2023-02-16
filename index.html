@@ -3,61 +3,8 @@
   <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-
-    <script>
-      // Overlay componenet for HUD so that the hud
-      // objects won't clip through test objects
-      AFRAME.registerComponent("overlay", {
-        dependencies: ["material"],
-        init: function () {
-          this.el.sceneEl.renderer.sortObjects = true;
-          this.el.object3D.renderOrder = 100;
-          this.el.components.material.material.depthTest = false;
-        },
-      });
-
-        /*
-         * Tick gets called every frame update. We want to create the effect of the clear
-         * button fading-in to become visible only as the user 'looks down' towards it.
-         */
-        tick: function () {
-          var element = this.el;
-
-          // We need the camera to determine where the user is looking
-          var camera = this.el.sceneEl.camera.el;
-          var rotation = camera.getAttribute("rotation");
-
-          // Calculate opacity based on downward tilt (rotation around x-axis), with a maximum of 50%
-          var opacity = 50;
-
-          // Set background opacity - note opacity needs to be converted from % to [0.0, 1.0]
-          element
-            .querySelector("#clear-button-bg")
-            .setAttribute("opacity", opacity * 0.01);
-
-          // Set text opacity - use different scale so it"s brighter, for better readability
-          element
-            .querySelector("#clear-button-fg")
-            .setAttribute("opacity", opacity * 0.02);
-        },
-      });
-
-      //google maps api conversion to aframe -in progress
-      AFRAME.registerComponent("googleMap", {
-        schema: { object_id: "" },
-
-        init: function () {
-          var mapProp = {
-            center: new google.maps.LatLng(51.508742, -0.12085),
-            zoom: 5,
-          };
-          var map = new google.maps.Map(
-            document.getElementById("googleMap"),
-            mapProp
-          );
-        },
-      });
-    </script>
+    <script src="https://unpkg.com/aframe-map/dist/aframe-map.min.js"></script>
+    hehehehaw
   </head>
   <body>
     <a-scene render-order="HUD, test-objects, floor">
@@ -107,6 +54,8 @@
       <!--       Main HUD display -->
       <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
         
+        <a-plane text="value: BeeseChurger" position="1.1 1.15 -2" color="#003865"></a-plane>
+    
         <a-image
           id="hudMap"
           src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
@@ -128,6 +77,7 @@
           material="opacity: 0.8"
         ></a-image>
       </a-entity>
+      
 
       <!--       Objects for hand tracking in aframe -->
       <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
@@ -157,7 +107,6 @@
             position="0 0.2 0"
             scale="5 5 5"
           ></a-entity>
-        <a-plane mixin="menu-item" position="-1.2  0.75 -5" text="value: Burger" button="item_id: 1"></a-plane>
         </a-circle>
       </a-entity>
     </a-scene>
