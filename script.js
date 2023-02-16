@@ -1,39 +1,16 @@
 // Overlay componenet for HUD so that the hud
       // objects won't clip through test objects
       AFRAME.registerComponent("overlay", {
-        dependencies: ["material"],
+        dependencies: ['material'],
         init: function () {
           this.el.sceneEl.renderer.sortObjects = true;
           this.el.object3D.renderOrder = 100;
           this.el.components.material.material.depthTest = false;
-        },
+        }
       });
 
-        /*
-         * Tick gets called every frame update. We want to create the effect of the clear
-         * button fading-in to become visible only as the user 'looks down' towards it.
-         */
-        tick: function () {
-          var element = this.el;
-
-          // We need the camera to determine where the user is looking
-          var camera = this.el.sceneEl.camera.el;
-          var rotation = camera.getAttribute("rotation");
-
-          // Calculate opacity based on downward tilt (rotation around x-axis), with a maximum of 50%
-          var opacity = 50;
-
-          // Set background opacity - note opacity needs to be converted from % to [0.0, 1.0]
-          element
-            .querySelector("#clear-button-bg")
-            .setAttribute("opacity", opacity * 0.01);
-
-          // Set text opacity - use different scale so it"s brighter, for better readability
-          element
-            .querySelector("#clear-button-fg")
-            .setAttribute("opacity", opacity * 0.02);
-        },
-      });
+    
+      
 
       //google maps api conversion to aframe -in progress
       AFRAME.registerComponent("googleMap", {
@@ -77,6 +54,6 @@
             element.setAttribute('color', data.click);
             
             }
-          });
-        }
+                                  
+        
       });
