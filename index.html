@@ -4,7 +4,7 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
-    // Overlay componenet for HUD so that the hud
+       // Overlay componenet for HUD so that the hud
       // objects won't clip through test objects
       AFRAME.registerComponent("overlay", {
         dependencies: ['material'],
@@ -63,7 +63,6 @@
           });
         }
       });
-    
     </script>
 </head>
   <body>
@@ -116,7 +115,7 @@
       <!--       Main HUD display -->
       <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
         
-        <a-plane text="value: BeeseChurger" position="1.1 1.15 -2" color="#003865"></a-plane>
+        <a-plane text="value: New Message from Mum:\nBeeseChurger; align: center; anchor: center; baseline: center; color: white; wrap-count: 15;" position="0.8 1.4 -2" color="#003865" id="menu-item" geometry="width: 1; height: 0.5;" material="color: #003865"></a-plane>
     
         <a-image
           id="hudMap"

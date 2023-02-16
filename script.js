@@ -1,13 +1,13 @@
 // Overlay componenet for HUD so that the hud
       // objects won't clip through test objects
-      AFRAME.registerComponent("overlay", {
-        dependencies: ['material'],
-        init: function () {
-          this.el.sceneEl.renderer.sortObjects = true;
-          this.el.object3D.renderOrder = 100;
-          this.el.components.material.material.depthTest = false;
-        }
-      });
+AFRAME.registerComponent("overlay", {
+  dependencies: ['material'],
+  init: function () {
+    this.el.sceneEl.renderer.sortObjects = true;
+    this.el.object3D.renderOrder = 100;
+    this.el.components.material.material.depthTest = false;
+  }
+});
 
     
       
@@ -52,8 +52,9 @@
           // Cursor click callback - updates button colour and updates a text label
           element.addEventListener('click', function () {
             element.setAttribute('color', data.click);
-            
-            }
-                                  
-        
+            });
+        },
       });
+                       
+        
+      
