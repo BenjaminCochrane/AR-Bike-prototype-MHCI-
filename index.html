@@ -5,27 +5,6 @@
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
     <script>
-      // Global variables: store food order data
-      var food_prices = [3.5, 1.5, 1.0];
-      var order_total = 0.0;
-      var order_count = 0;
-
-      // Update the order value label to current total
-      function updateOrderValueLabel() {
-        document
-          .querySelector("#order-price")
-          .setAttribute("value", order_total.toFixed(2));
-      }
-
-      // Clear all items from the order
-      function clearOrder() {
-        order_total = 0.0;
-        order_count = 0;
-        updateOrderValueLabel();
-
-        document.querySelector("#basket").replaceChildren();
-      }
-
       // Overlay componenet for HUD so that the hud
       // objects won't clip through test objects
       AFRAME.registerComponent("overlay", {
