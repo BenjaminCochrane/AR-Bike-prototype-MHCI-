@@ -49,13 +49,13 @@
         },
       });
       
-      AFRAME.registerComponent('soundControl', {
+      AFRAME.registerComponent('soundcontrol', {
         schema: {
           soundPlaying {default: false}
         },
           init: function(){
         
-          element.addEventListener('pausePlay', function (){
+          element.addEventListener('click', function (){
             var audioSource = document.querySelector('raceToMountFuji');
             
             if soundPlaying == false {
@@ -105,7 +105,7 @@
     <a-scene render-order="HUD, test-objects, floor">
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
-        <audio id="raceToMountFuji" preload="auto" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/Race%20to%20Mt.%20Fuji.mp3?v=1677152498862"></audio>
+        <audio id="raceToMountFuji" preload="auto" autoplay=true src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/Race%20to%20Mt.%20Fuji.mp3?v=1677152498862"></audio>
         <a-assest-item
           id="map"
           src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
@@ -115,6 +115,7 @@
         <a-mixin
           id="item-sphere"
           button
+          soundcontrol
           geometry="primitive: sphere;"
           material="color: white; opacity: 0.3;"
           scale="0.15 0.15 0.15"
@@ -206,11 +207,13 @@
           material="opacity: 0.8"
         ></a-image>
       </a-entity>
+      
 
       <a-entity id="test-objects" position="0 1.6 -1">
         <a-circle
           menu-button="item_id: 1;"
           mixin="item-sphere"
+          soundcontrol
           class="selectable"
           position="-0.6 0.6 0"
           rotation="0 0 0"
@@ -221,6 +224,7 @@
             gltf-model="#map"
             position="0 0.2 0"
             scale="5 5 5"
+            soundcontrol
           ></a-entity>
         </a-circle>
       </a-entity>
