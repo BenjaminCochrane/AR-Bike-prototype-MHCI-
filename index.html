@@ -83,7 +83,7 @@
     </script>
   </head>
   <body>
-    <a-scene render-order="HUD, test-objects, floor, cityModel">
+    <a-scene render-order="HUD, test-objects, floor">
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
         <audio id="CrateHit" preload="auto" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/01%20-%20Help!%20(Remastered%202009).mp3?v=1676554082463"></audio>
@@ -115,12 +115,6 @@
         height="40"
         color="#7BC8A4"
       ></a-plane>
-      <a-box 
-        position="0 2 -5"
-        rotation="0 10 0"
-        
-        color=#808080
-      ></a-box>
 
       <!-- Create cursor with animated visual feedback -->
       <a-entity camera look-controls wasd-controls position="0 1.6 0">
