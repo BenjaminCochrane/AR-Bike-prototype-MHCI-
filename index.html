@@ -56,8 +56,16 @@
           init: function(){
         
           element.addEventListener('pausePlay', function (){
-            var entity = document.querySelector('[sound]');
-            entity.components.sound.stopSound();
+            var audioSource = document.querySelector('raceToMountFuji');
+            
+            if soundPlaying == false {
+              soundPlaying == true;
+              audioSource.components.sound.playSound();
+            }
+            else{
+              soundPlaying == true;
+              audioSource.components.sound.stopSound();
+            }
           })
       }
       });
@@ -97,7 +105,7 @@
     <a-scene render-order="HUD, test-objects, floor">
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
-        <audio id="CrateHit" preload="auto" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/01%20-%20Help!%20(Remastered%202009).mp3?v=1676554082463"></audio>
+        <audio id="raceToMountFuji" preload="auto" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/Race%20to%20Mt.%20Fuji.mp3?v=1677152498862"></audio>
         <a-assest-item
           id="map"
           src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
@@ -111,8 +119,6 @@
           material="color: white; opacity: 0.3;"
           scale="0.15 0.15 0.15"
         ></a-mixin>
-        <audio id="hudMusic" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/01%20-%20Help!%20(Remastered%202009).mp3?v=1676554082463"
-               preload="auto"></audio>
         
       </a-assets>
 
