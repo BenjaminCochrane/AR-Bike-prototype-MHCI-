@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="pinchable.js"></script>
     <script src="play-all-model-animations.js"></script>
     <script>
       AFRAME.registerComponent('modify-materials', {
@@ -105,7 +106,7 @@
     <a-scene render-order="HUD, test-objects, floor">
       <!-- Assets: 3D models and mixin definitions -->
       <a-assets>
-        <audio id="raceToMountFuji" preload="auto" autoplay=true src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/Race%20to%20Mt.%20Fuji.mp3?v=1677152498862"></audio>
+        <audio id="raceToMountFuji" preload="auto" autoplay="true" src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/Race%20to%20Mt.%20Fuji.mp3?v=1677152498862"></audio>
         <a-assest-item
           id="map"
           src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
