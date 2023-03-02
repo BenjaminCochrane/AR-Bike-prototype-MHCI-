@@ -48,6 +48,19 @@
           );
         },
       });
+      
+      AFRAME.registerComponent('soundControl', {
+        schema: {
+          soundPlaying {default: false}
+        },
+          init: function(){
+        
+          element.addEventListener('pausePlay', function (){
+            var entity = document.querySelector('[sound]');
+            entity.components.sound.stopSound();
+          })
+      }
+      });
 
 
       AFRAME.registerComponent('button', {
