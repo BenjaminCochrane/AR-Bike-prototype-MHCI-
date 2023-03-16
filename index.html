@@ -148,15 +148,17 @@
           animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 100; to: 1 1 1"
         >
         </a-entity>
-      </a-entity>
-      <!-- trying hand gestures here -->
-      <a-entity
-        id="rightHand"
-        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc handModelStyle=toon"
-      ></a-entity>
-
-      <!--       Main HUD display -->
-      <a-entity id="HUD" camera look-controls wasd-controls position="0 1.6 0">
+        <a-image
+          id="hudMap"
+          src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
+          overlay
+          rotation="0 0 0"
+          position="-1.1 1.15 -2"
+          width="1"
+          height="1"
+          material="opacity: 0.8"
+        ></a-image>
+        
         <a-plane
           text="value: New Message from Mother:\nBeeseChurger \n Motherfucker\n Fuck you;
                  align: center; 
@@ -188,16 +190,6 @@
         ></a-plane>
 
         <a-image
-          id="hudMap"
-          src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/map.jpg?v=1675688231794"
-          overlay
-          rotation="0 0 0"
-          position="-1.1 1.15 -2"
-          width="1"
-          height="1"
-          material="opacity: 0.8"
-        ></a-image>
-        <a-image
           id="hudMusic"
           src="https://cdn.glitch.global/c1150980-99ea-45c3-aac3-4ac3325f3b9e/spotify.jpg?v=1675688231794"
           overlay
@@ -206,10 +198,15 @@
           width="1.2"
           height="0.6"
           material="opacity: 0.8"
-        ></a-image>
+        ></a-image>     
       </a-entity>
-      
+      <!-- trying hand gestures here -->
+      <a-entity
+        id="rightHand"
+        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc handModelStyle=toon"
+      ></a-entity>
 
+      
       <a-entity id="test-objects" position="0 1.6 -1">
         <a-circle
           menu-button="item_id: 1;"
