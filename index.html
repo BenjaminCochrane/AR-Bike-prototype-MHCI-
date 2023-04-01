@@ -5,21 +5,21 @@
     <script src="pinchable.js"></script>
     <script src="play-all-model-animations.js"></script>
     <script>
-      AFRAME.registerComponent('modify-materials', {
-        init: function () {
-          // Wait for model to load.
-          this.el.addEventListener('model-loaded', () => {
-            // Grab the mesh / scene.
-            const obj = this.el.getObject3D('mesh');
-            // Go over the submeshes and modify materials we want.
-            obj.traverse(node => {
-              if (node.name.indexOf('ship') !== -1) {
-                node.material.color.set('red');
-              }
-            });
-          });
-        }
-      });
+      // AFRAME.registerComponent('modify-materials', {
+      //   init: function () {
+      //     // Wait for model to load.
+      //     this.el.addEventListener('model-loaded', () => {
+      //       // Grab the mesh / scene.
+      //       const obj = this.el.getObject3D('mesh');
+      //       // Go over the submeshes and modify materials we want.
+      //       obj.traverse(node => {
+      //         if (node.name.indexOf('ship') !== -1) {
+      //           node.material.color.set('red');
+      //         }
+      //       });
+      //     });
+      //   }
+      // });
     </script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
